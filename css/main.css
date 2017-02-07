@@ -1,0 +1,60 @@
+body
+{
+	font-size:14pt;
+	text-align:center;			
+}
+		
+#InpDate 
+{						
+	text-align: center;					
+	font-size:14pt;				
+}
+		
+#GoB
+{
+	margin-top:0pt;
+	font-size:14pt;
+}
+		
+table
+{
+	width:98%;
+	border-collapse: collapse;
+	margin-top:5pt;
+	margin-left:5pt;
+}
+		
+td,th 
+{
+	height:25pt;
+}		
+		
+td.main
+{
+	border: 1px solid black;
+	width:30%;							
+}						
+		
+td.main:hover, td.additional:hover
+{
+	background-color:#ccffcc;
+}					
+			
+.header_controls
+{
+	margin-top:20pt;
+	margin-bottom:-10pt;
+	line-height:0;
+	width:80%;
+	display:inline-block;
+}
+
+.headerBG
+{	
+	background-color:#99ccff !important;
+}
+
+.dbutton
+{
+	width:35% !important;
+}

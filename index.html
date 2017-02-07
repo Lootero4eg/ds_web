@@ -1,0 +1,232 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<title>Даты и судьбы</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="css/main.css" />	
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />	
+	<script src="scripts/jquery.js"></script>
+	<script src="scripts/mobileinit.js"></script>
+	<script src="scripts/jquery.mobile-1.4.5.min.js"></script>	
+	<script src="scripts/pmatrix.js"></script>		
+	
+	<script>
+	$.mobile.changeGlobalTheme = function(theme)
+    {
+        // These themes will be cleared, add more
+        // swatch letters as needed.
+        var themes = " a b c d e";
+
+        // Updates the theme for all elements that match the
+        // CSS selector with the specified theme class.
+        function setTheme(cssSelector, themeClass, theme)
+        {
+            $(cssSelector)
+                    .removeClass(themes.split(" ").join(" " + themeClass + "-"))
+                    .addClass(themeClass + "-" + theme)
+                    .attr("data-theme", theme);
+        }
+
+        // Add more selectors/theme classes as needed.
+        setTheme(".ui-mobile-viewport", "ui-overlay", theme);
+        setTheme("[data-role='page']", "ui-page-theme", theme);
+        setTheme("[data-role='header']", "ui-bar", theme);
+        setTheme("[data-role='listview'] > li", "ui-bar", theme);
+        setTheme(".ui-btn", "ui-btn-up", theme);
+        setTheme(".ui-btn", "ui-btn-hover", theme);
+    };
+	
+	var matrixFieldClick = function(item)
+	{	
+		//console.log(item.toElement.innerHTML);
+		$('#description').html("");
+		
+		var descr = GetDescription(item.toElement.id, item.toElement.innerHTML);
+		if(descr != [] && descr != "")
+		{
+			$('#description').html(descr);
+		}
+	}
+	</script>
+</head>
+
+<body>
+<div data-role="page" id="mainpage" style="overflow:hidden">	
+	<div data-role="header" class="top_header headerBG" data-position="fixed"> 
+	<h1>Даты и судьбы</h1> 
+	</div> 	
+	
+	<p class="header_controls">
+	<label for="InpDate">Введите дату:</label><br>
+	<input type="text" data-role1="date" name="InpDate" id="InpDate" value=""><br>
+	<button class="ui-shadow ui-btn ui-corner-all ui-disabled" id="GoB">Расчитать</button>
+	</p>
+	
+	<table id="pmatrix" class="ui-disabled">
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td class="additional" id="sex"></td>
+	</tr>
+	<tr>
+		<td class="main" id="character"></td>
+		<td class="main" id="health"></td>
+		<td class="main" id="luck"></td>
+		<td class="additional" id="purpose"></td>
+	</tr>
+	<tr>
+		<td class="main" id="energy"></td>
+		<td class="main" id="logic"></td>
+		<td class="main" id="duty"></td>
+		<td class="additional" id="family"></td>
+	</tr>
+	<tr>
+		<td class="main" id="technical"></td>
+		<td class="main" id="hardwork"></td>
+		<td class="main" id="memory"></td>
+		<td class="additional" id="habbits"></td>
+	</tr>
+	<tr>
+		<td class="additional" id="selfrating"></td>
+		<td class="additional" id="workforfamily"></td>
+		<td class="additional" id="talent"></td>
+		<td class="additional" id="spirituality"></td>
+	</tr>
+	</table>	
+	
+	<p id="description" class="ui-li-desc">        
+    </p>
+	<div data-role="footer" data-position="fixed" style="height:40px">
+	<div data-role="navbar">
+	<ul>
+		<li><a href="#about" data-icon="info" class="ui-btn-center headerBG" data-rel="dialog" data-transition="pop"></a></li>		
+		<li><a href="#settings" data-icon="gear" class="ui-btn-center headerBG"></a> </li>
+	</ul>
+	</div><!-- /navbar -->
+	</div>
+		
+</div>
+
+<div data-role="page" id="settings"><!-- page2 -->
+	<div data-role="header" class="headerBG">
+		<h1>Настройки</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">		
+	<form1>    
+	<fieldset data-role="controlgroup" style="line-height:0;">
+    <legend style="margin-bottom:15pt">Отображение описания:</legend>
+        <input type="radio" name="rb1" id="rb1" value="rb1" checked="checked">
+        <label for="rb1">Под психо-матрицей</label>
+        <input type="radio" name="rb1" id="rb2" value="rb2">
+        <label for="rb2">В отдельном окне</label>
+			
+	</fieldset>	
+
+	<p align=left>		
+		<label for="longClickflip">Показывать детальную расшифровку<br>по долгому нажатию:</label>
+		<p align=left style="margin:-20px;margin-bottom:10px;">		
+	    <input type="checkbox" data-role="flipswitch" name="longClickflip" id="longClickflip" data-on-text="Вкл" data-off-text="Выкл">	
+		</p>
+	</p>
+	
+	
+	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" style="text-align:left;">
+    <legend>Цветовая тема:</legend>
+        <input type="radio" name="theme1" id="theme1" value="list" checked="checked" onchange="$.mobile.changeGlobalTheme('a');">
+        <label for="theme1">Светлая</label>
+        <input type="radio" name="theme1" id="theme2" value="grid" onchange="$.mobile.changeGlobalTheme('b');">
+        <label for="theme2">Темная</label>
+	</fieldset>							
+	
+	</form1>
+	</div><!-- /content -->	
+	
+	<div data-role="footer" data-position="fixed">
+	<a id="saveb" class="ui-btn ui-btn-inline dbutton" href="#mainpage">Сохранить</a>	
+	<a id="cancelb" class="ui-btn ui-btn-inline dbutton" href="#mainpage">Отмена</a>	
+	</div>
+		
+</div><!-- /page2 -->
+
+<div data-role="page" id="about"><!-- page3 -->
+	<div data-role="header" class="headerBG">
+		<h1>О программе</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">		
+	Даты и судьбы версия 0.8<br>
+	Автор: Анкушин Н.В.<br>
+	nankushin@yandex.ru
+	</div><!-- /content -->	
+		
+	<a id="cancelb2" class="ui-btn ui-btn-inline" href="#mainpage">Закрыть</a>	
+		
+</div><!-- /page3 -->
+
+<script>
+$(document).ready(function() {	
+	 $('input[type="text"]').change(function(){        
+		var parts = this.value.split(".");		
+		var inputDate = new Date(parts[2], parts[1] - 1, parts[0]);		
+        //var inputDate = new Date(this.value);		
+		$('#GoB').removeClass('ui-disabled');
+		$('#pmatrix').removeClass('ui-disabled');
+		
+		$('#GoB').bind("click",function()
+		{ 		
+			var matrix = calculateMatrix(inputDate);
+			if(matrix != [])
+			{
+				$('#character').html(GetMatrixValue("1", matrix.character));
+				$('#energy').html(GetMatrixValue("2", matrix.energy));
+				$('#technical').html(GetMatrixValue("3", matrix.technical));
+				$('#health').html(GetMatrixValue("4", matrix.health));
+				$('#logic').html(GetMatrixValue("5", matrix.logic));
+				$('#hardwork').html(GetMatrixValue("6", matrix.hardwork));
+				$('#luck').html(GetMatrixValue("7", matrix.luck));
+				$('#duty').html(GetMatrixValue("8", matrix.duty));
+				$('#memory').html(GetMatrixValue("9", matrix.memory));
+				$('#sex').html(matrix.sex());
+				$('#purpose').html(matrix.purpose());
+				$('#family').html(matrix.family());
+				$('#habbits').html(matrix.habbits());
+				$('#spirituality').html(matrix.spirituality());
+				$('#selfrating').html(matrix.selfrating());
+				$('#workforfamily').html(matrix.workforfamily());
+				$('#talent').html(matrix.talent());
+								
+			}
+		});
+		
+		//--binding events
+		$('#character').bind("click",matrixFieldClick);
+		$('#energy').bind("click",matrixFieldClick);
+		$('#technical').bind("click",matrixFieldClick);
+		$('#health').bind("click",matrixFieldClick);
+		$('#logic').bind("click",matrixFieldClick);
+		$('#hardwork').bind("click",matrixFieldClick);
+		$('#luck').bind("click",matrixFieldClick);
+		$('#duty').bind("click",matrixFieldClick);
+		$('#memory').bind("click",matrixFieldClick);
+		
+		$('#sex').bind("click",matrixFieldClick);
+		$('#purpose').bind("click",matrixFieldClick);
+		$('#family').bind("click",matrixFieldClick);
+		$('#habbits').bind("click",matrixFieldClick);
+		$('#spirituality').bind("click",matrixFieldClick);
+		$('#selfrating').bind("click",matrixFieldClick);
+		$('#workforfamily').bind("click",matrixFieldClick);
+		$('#talent').bind("click",matrixFieldClick);
+		
+		//$('#character').bind("taphold",function(){alert(1);});		
+    });
+	
+	//$('#character').html("1111");
+	//console.log($('#character'));	
+});
+</script>
+</body>
+</html>
