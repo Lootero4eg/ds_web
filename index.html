@@ -39,13 +39,29 @@
 	
 	var matrixFieldClick = function(item)
 	{	
-		//console.log(item.toElement.innerHTML);
-		$('#description').html("");
-		
 		var descr = GetDescription(item.toElement.id, item.toElement.innerHTML);
-		if(descr != [] && descr != "")
+				
+		if($('#descr_sett :radio:checked').val() == 'under_matrix_rb')
 		{
-			$('#description').html(descr);
+			$('#description2').hide();
+			$('#description').show();
+			$('#description').html("");
+					
+			if(descr != [] && descr != "")			
+				$('#description').html(descr);			
+		}
+		
+		if($('#descr_sett :radio:checked').val() == 'window_desc_rb')
+		{
+			$('#description').hide();
+			$('#description2').show();
+			$('#description2').html("");
+					
+			if(descr != [] && descr != "")
+			{
+				$('#description2').html(descr);
+				$('#descrwindow').popup('open');
+			}
 		}
 	}
 	</script>
@@ -57,8 +73,8 @@
 	<h1>Даты и судьбы</h1> 
 	</div> 	
 	
-	<p class="header_controls">
-	<label for="InpDate">Введите дату:</label><br>
+	<p class="header_controls">	
+	<label for="InpDate">Введите дату(дд.мм.гггг):</label><br>	
 	<input type="text" data-role1="date" name="InpDate" id="InpDate" value=""><br>
 	<button class="ui-shadow ui-btn ui-corner-all ui-disabled" id="GoB">Расчитать</button>
 	</p>
@@ -98,10 +114,36 @@
 	
 	<p id="description" class="ui-li-desc">        
     </p>
+	
+	<div data-role="popup" id="descrwindow">
+	<div data-role="header" class="headerBG">
+		<h1>Описание</h1>
+	</div><!-- /header -->	
+	<div role="main" class="ui-content" style="width:250px">
+		<p id="description2" class="ui-li-desc">	
+		</p>
+	</div>
+	<a id="cancelb3" class="ui-btn ui-btn-inline" href="#mainpage">Закрыть</a>			
+	</div>
+	
+	<div data-role="popup" id="about"><!-- About window -->
+	<div data-role="header" class="headerBG">
+		<h1>О программе</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content" style="width:250px">
+	Даты и судьбы версия 0.9b<br>
+	Автор: Анкушин Н.В.<br>
+	nankushin@yandex.ru
+	</div><!-- /content -->	
+		
+	<a id="cancelb2" class="ui-btn ui-btn-inline" href="#mainpage">Закрыть</a>			
+	</div><!-- /About window -->
+	
 	<div data-role="footer" data-position="fixed" style="height:40px">
 	<div data-role="navbar">
 	<ul>
-		<li><a href="#about" data-icon="info" class="ui-btn-center headerBG" data-rel="dialog" data-transition="pop"></a></li>		
+		<li><a href="#about" data-icon="info" class="ui-btn-center headerBG" data-rel="popup" data-position-to="window"></a></li>		
 		<li><a href="#settings" data-icon="gear" class="ui-btn-center headerBG"></a> </li>
 	</ul>
 	</div><!-- /navbar -->
@@ -114,15 +156,13 @@
 		<h1>Настройки</h1>
 	</div><!-- /header -->
 
-	<div role="main" class="ui-content">		
-	<form1>    
-	<fieldset data-role="controlgroup" style="line-height:0;">
+	<div role="main" class="ui-content">			
+	<fieldset data-role="controlgroup" style="line-height:0;" name="descr_sett" id="descr_sett">
     <legend style="margin-bottom:15pt">Отображение описания:</legend>
-        <input type="radio" name="rb1" id="rb1" value="rb1" checked="checked">
-        <label for="rb1">Под психо-матрицей</label>
-        <input type="radio" name="rb1" id="rb2" value="rb2">
-        <label for="rb2">В отдельном окне</label>
-			
+        <input type="radio" name="under_matrix_rb" id="under_matrix_rb" value="under_matrix_rb" checked="checked">
+        <label for="under_matrix_rb">Под психо-матрицей</label>
+        <input type="radio" name="under_matrix_rb" id="window_desc_rb" value="window_desc_rb">
+        <label for="window_desc_rb">В отдельном окне</label>			
 	</fieldset>	
 
 	<p align=left>		
@@ -140,8 +180,7 @@
         <input type="radio" name="theme1" id="theme2" value="grid" onchange="$.mobile.changeGlobalTheme('b');">
         <label for="theme2">Темная</label>
 	</fieldset>							
-	
-	</form1>
+		
 	</div><!-- /content -->	
 	
 	<div data-role="footer" data-position="fixed">
@@ -150,21 +189,6 @@
 	</div>
 		
 </div><!-- /page2 -->
-
-<div data-role="page" id="about"><!-- page3 -->
-	<div data-role="header" class="headerBG">
-		<h1>О программе</h1>
-	</div><!-- /header -->
-
-	<div role="main" class="ui-content">		
-	Даты и судьбы версия 0.8<br>
-	Автор: Анкушин Н.В.<br>
-	nankushin@yandex.ru
-	</div><!-- /content -->	
-		
-	<a id="cancelb2" class="ui-btn ui-btn-inline" href="#mainpage">Закрыть</a>	
-		
-</div><!-- /page3 -->
 
 <script>
 $(document).ready(function() {	
@@ -219,13 +243,8 @@ $(document).ready(function() {
 		$('#spirituality').bind("click",matrixFieldClick);
 		$('#selfrating').bind("click",matrixFieldClick);
 		$('#workforfamily').bind("click",matrixFieldClick);
-		$('#talent').bind("click",matrixFieldClick);
-		
-		//$('#character').bind("taphold",function(){alert(1);});		
-    });
-	
-	//$('#character').html("1111");
-	//console.log($('#character'));	
+		$('#talent').bind("click",matrixFieldClick);		
+    });	
 });
 </script>
 </body>

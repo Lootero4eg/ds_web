@@ -42,7 +42,7 @@ function calculateMatrix(date)
 	for (var i = 0; i < digit3.toString().length; i++) 
 		digit4 += parseInt(digit3.toString()[i]);
 	dateStr += digit4.toString();
-	console.log(dateStr);
+	
 	for (var i = 0; i < dateStr.length; i++)
 	{
 		switch (dateStr[i]) {

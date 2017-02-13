@@ -3,7 +3,7 @@ body
 	font-size:14pt;
 	text-align:center;			
 }
-		
+	
 #InpDate 
 {						
 	text-align: center;					
@@ -37,7 +37,8 @@ td.main
 		
 td.main:hover, td.additional:hover
 {
-	background-color:#ccffcc;
+	background-color:#ccffcc;	
+	color:black;	
 }					
 			
 .header_controls
