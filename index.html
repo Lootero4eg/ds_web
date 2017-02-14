@@ -11,61 +11,7 @@
 	<script src="scripts/mobileinit.js" charset="utf-8"></script>
 	<script src="scripts/jquery.mobile-1.4.5.min.js"></script>	
 	<script src="scripts/pmatrix.js" charset="utf-8"></script>		
-	
-	<script>
-	$.mobile.changeGlobalTheme = function(theme)
-    {
-        // These themes will be cleared, add more
-        // swatch letters as needed.
-        var themes = " a b c d e";
-
-        // Updates the theme for all elements that match the
-        // CSS selector with the specified theme class.
-        function setTheme(cssSelector, themeClass, theme)
-        {
-            $(cssSelector)
-                    .removeClass(themes.split(" ").join(" " + themeClass + "-"))
-                    .addClass(themeClass + "-" + theme)
-                    .attr("data-theme", theme);
-        }
-
-        // Add more selectors/theme classes as needed.
-        setTheme(".ui-mobile-viewport", "ui-overlay", theme);
-        setTheme("[data-role='page']", "ui-page-theme", theme);
-        setTheme("[data-role='header']", "ui-bar", theme);
-        setTheme("[data-role='listview'] > li", "ui-bar", theme);
-        setTheme(".ui-btn", "ui-btn-up", theme);
-        setTheme(".ui-btn", "ui-btn-hover", theme);
-    };
-	
-	var matrixFieldClick = function(item)
-	{	
-		var descr = GetDescription(item.toElement.id, item.toElement.innerHTML);
-				
-		if($('#descr_sett :radio:checked').val() == 'under_matrix_rb')
-		{
-			$('#description2').hide();
-			$('#description').show();
-			$('#description').html("");
-					
-			if(descr != [] && descr != "")			
-				$('#description').html(descr);			
-		}
-		
-		if($('#descr_sett :radio:checked').val() == 'window_desc_rb')
-		{
-			$('#description').hide();
-			$('#description2').show();
-			$('#description2').html("");
-					
-			if(descr != [] && descr != "")
-			{
-				$('#description2').html(descr);
-				$('#descrwindow').popup('open');
-			}
-		}
-	}
-	</script>
+	<script src="scripts/additional.js" charset="utf-8"></script>	
 </head>
 
 <body>
@@ -169,24 +115,25 @@
 	<p align=left>		
 		<label for="longClickflip">Показывать детальную расшифровку<br>по долгому нажатию:</label>
 		<p align=left style="margin:-20px;margin-bottom:10px;">		
-	    <input type="checkbox" data-role="flipswitch" name="longClickflip" id="longClickflip" data-on-text="Вкл" data-off-text="Выкл">	
+	    <input type="checkbox" data-role="flipswitch" name="longClickflip" id="longClickflip" 
+			data-on-text="Вкл" data-off-text="Выкл" onchange="alert('Эта функция будет доступна в следующей версии программы!')">	
 		</p>
 	</p>
 	
 	
-	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" style="text-align:left;">
+	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" style="text-align:left;" id="theme_sett" name="theme_sett">
     <legend>Цветовая тема:</legend>
-        <input type="radio" name="theme1" id="theme1" value="list" checked="checked" onchange="$.mobile.changeGlobalTheme('a');">
+        <input type="radio" name="theme" id="theme1" value="theme1" checked="checked" onchange="$.mobile.changeGlobalTheme('a');">
         <label for="theme1">Светлая</label>
-        <input type="radio" name="theme1" id="theme2" value="grid" onchange="$.mobile.changeGlobalTheme('b');">
+        <input type="radio" name="theme" id="theme2" value="theme2" onchange="$.mobile.changeGlobalTheme('b');">
         <label for="theme2">Темная</label>
 	</fieldset>							
 		
 	</div><!-- /content -->	
 	
 	<div data-role="footer" data-position="fixed">
-	<a id="saveb" class="ui-btn ui-btn-inline dbutton" href="#mainpage">Сохранить</a>	
-	<a id="cancelb" class="ui-btn ui-btn-inline dbutton" href="#mainpage">Отмена</a>	
+	<a id="saveb" class="ui-btn ui-btn-inline dbutton" onclick="save_settings()" href="#mainpage">Сохранить</a>	
+	<a id="cancelb" class="ui-btn ui-btn-inline dbutton" onclick="load_settings()" href="#mainpage">Отмена</a>	
 	</div>
 		
 </div><!-- /page2 -->
@@ -246,6 +193,8 @@ $(document).ready(function() {
 		$('#workforfamily').bind("click",matrixFieldClick);
 		$('#talent').bind("click",matrixFieldClick);		
     });	
+	
+	load_settings();	
 });
 </script>
 </body>
