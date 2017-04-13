@@ -92,10 +92,10 @@ function GetMatrixValue(item, count)
 }
 
 function GetDescription(name, value)
-{	
+{
 	if(value != [] && value != "" && value != "НЕТ")
 	{
-		var digValue = parseInt(value.length);		
+		var digValue = parseInt(value.length);			
 		if(name == "character")
 		{					
 			if(digValue == 1)				
@@ -183,92 +183,92 @@ function GetDescription(name, value)
 		}
 		if(name == "sex")
 		{					
-			if(digValue <= 1)				
+			if(value <= 1)				
 				return "Секс: холодный";
-			if(digValue = 2)
+			if(value == 2)
 				return "Секс: нормальный";
-			if(digValue == 3)
+			if(value == 3)
 				return "Секс: спонтанный";
-			if(digValue == 4 && digValue == 5)
+			if(value == 4 && value == 5)
 				return "Секс: как искусство";
-			if(digValue >= 6)
+			if(value >= 6)
 				return "Секс: не могут жить без секса. С легка озабоченые люди";
 		}
 		if(name == "purpose")
 		{					
-			if(digValue <= 1)				
+			if(value <= 1)				
 				return "Целеустремленность: не ставит перед собой цели или задачи";
-			if(digValue == 2)
+			if(value == 2)
 				return "Целеустремленность: медленно разбегается по жизни";
-			if(digValue == 3)
+			if(value == 3)
 				return "Целеустремленность: спонтанная, может менять свои цели";
-			if(digValue == 4)
+			if(value == 4)
 				return "Целеустремленность: сильная";
-			if(digValue == 5)
+			if(value == 5)
 				return "Целеустремленность: очень сильная. Обычно такие люди разбиваются в лепешку, но достигают поставленныз целей";
-			if(digValue >= 6)
+			if(value >= 6)
 				return "Целеустремленность: ставят себе множество целей из-за чего может ничего не получится";
 		}
 		if(name == "family")
 		{					
-			if(digValue <= 2)				
+			if(value <= 2)				
 				return "Семья: ждет предложения от других";			
-			if(digValue == 3)
+			if(value == 3)
 				return "Семья: если решается на семью, то второй половинке не надо раздумывать, а то убежит";
-			if(digValue == 4)
+			if(value == 4)
 				return "Семья: хочет создать семью. По вине этого человека брак не распадается";
-			if(digValue == 5)
+			if(value == 5)
 				return "Семья: очень сильное качество семьянина";
-			if(digValue >= 6)
+			if(value >= 6)
 				return "Семья: качество семьянина ослаблено. Долго подбирает свой идеал";
 		}
 		if(name == "habbits")
 		{					
-			if(digValue <= 2)				
+			if(value <= 2)				
 				return "Привычки, привязанности: легок на подъем";			
-			if(digValue == 3)
+			if(value == 3)
 				return "Привычки, привязанности: спонтанные, легко менят привычки, вещи, людей";
-			if(digValue >= 4)
+			if(value >= 4)
 				return "Привычки, привязанности: очень стабильные люди";			
 		}
 		if(name == "spirituality")
 		{					
-			if(digValue <= 5)				
+			if(value <= 5)				
 				return "Духовность: возростает";			
-			if(digValue >= 6)
+			if(value >= 6)
 				return "Духовность: перегрузка, бездуховность, фанатизм. Могут создовать себе кумиров";			
 		}
 		if(name == "selfrating")
 		{					
-			if(digValue <= 3)				
+			if(value <= 3)				
 				return "Самооценка: низкая";
-			if(digValue == 4)				
+			if(value == 4)				
 				return "Самооценка: нормальная";
-			if(digValue == 5)
+			if(value == 5)
 				return "Самооценка: идеальная";
-			if(digValue >= 6)
+			if(value >= 6)
 				return "Самооценка: завышенная";			
 		}
 		if(name == "workforfamily")
 		{					
-			if(digValue <= 2)				
+			if(value <= 2)				
 				return "Обеспечение семьи: слабое стремление обеспечивать себя и семью";
-			if(digValue == 3)
+			if(value == 3)
 				return "Обеспечение семьи: человек хочет быстро по работать, чтобы средств хватило на какой то срок";
-			if(digValue >= 4)
+			if(value >= 4)
 				return "Обеспечение семьи: маньак в обеспечении семьи";			
 		}
 		if(name == "talent")
 		{					
-			if(digValue == 1)				
+			if(value == 1)				
 				return "Талант: слабый";
-			if(digValue == 2)				
+			if(value == 2)				
 				return "Талант: нормальный";
-			if(digValue == 3)
+			if(value == 3)
 				return "Талант: спонтанный";
-			if(digValue == 4)
+			if(value == 4)
 				return "Талант: развит, но не предел";
-			if(digValue >= 5)
+			if(value >= 5)
 				return "Талант: очень сильный";			
 		}
 	}
